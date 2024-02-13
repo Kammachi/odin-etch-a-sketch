@@ -1,0 +1,14 @@
+.container {
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    border: solid black 1px;
+    width: 900px;
+}
+
+.gridSquare {
+    box-sizing: border-box;
+    width: 6.25%;
+    padding-top: 6.25%;
+    border: inherit;
+}
