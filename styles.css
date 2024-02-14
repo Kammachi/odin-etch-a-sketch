@@ -3,12 +3,19 @@
     display: flex;
     flex-wrap: wrap;
     border: solid black 1px;
-    width: 900px;
+    width: 850px;
+    height: 850px;
+    margin: auto;
 }
 
 .gridSquare {
     box-sizing: border-box;
-    width: 6.25%;
-    padding-top: 6.25%;
     border: inherit;
+}
+
+#sizeButton {
+    display: block;
+    margin: 16px auto;
+    padding: 4px 8px;
+    font-size: 24px;
 }
