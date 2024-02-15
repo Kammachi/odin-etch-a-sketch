@@ -1,4 +1,17 @@
 const container = document.querySelector('.container');
+let squares;
+
+createGrid(16)
+
+let darkening = false;
+let rainbow = false;
+let lightness = 100;
+
+listenForHover()
+
+const darkeningButton = document.querySelector('#darkeningButton');
+const sizeButton = document.querySelector('#sizeButton');
+const colorButton = document.querySelector('#colorButton');
 
 
 function createGrid(numberOfSquares) {
@@ -10,24 +23,10 @@ function createGrid(numberOfSquares) {
         squareToAdd.style.heigth = `${100 / numberOfSquares}%`;
 
         container.appendChild(squareToAdd);
+
+        squares = document.querySelectorAll('.gridSquare');
     }
 }
-
-
-function listenForHover() {
-    squares.forEach(square => {
-        square.addEventListener('mouseover', () => {
-            square.style.backgroundColor = "black";
-        });
-    });
-}
-
-
-createGrid(16)
-
-let squares = document.querySelectorAll('.gridSquare');
-
-listenForHover()
 
 
 function removeGrid() {
@@ -38,7 +37,35 @@ function removeGrid() {
 }
 
 
-const sizeButton = document.querySelector('#sizeButton');
+function listenForHover() {
+    squares.forEach(square => {
+        square.addEventListener('mouseover', () => {
+            const color = Math.floor(Math.random() * 360);
+
+            if (rainbow === false) lightness = 0;
+            
+            square.style.backgroundColor = `hsl(${color}, 50%, ${lightness}%)`;
+
+            if (darkening === true) lightness -= 10;
+            else lightness = 50;
+        });
+    });
+}
+
+
+darkeningButton.addEventListener('click', () => {
+    darkening = !darkening;
+    lightness = 100;
+
+    switch (darkening) {
+        case true:
+            darkeningButton.textContent = "Darkening: On";
+            return;
+        case false:
+            darkeningButton.textContent = "Darkening: Off";
+    }
+});
+
 
 sizeButton.addEventListener('click', () => {
     const numberOfSquares = parseInt(prompt("Number of squares on the side:"));
@@ -59,7 +86,19 @@ sizeButton.addEventListener('click', () => {
     removeGrid()
     createGrid(numberOfSquares)
 
-    squares = document.querySelectorAll('.gridSquare');
-
     listenForHover()
+});
+
+
+colorButton.addEventListener('click', () => {
+    rainbow = !rainbow;
+    lightness = 100;
+
+    switch (rainbow) {
+        case true:
+            colorButton.textContent = "Black";
+            return;
+        case false:
+            colorButton.textContent = "Rainbow";
+    }
 });
